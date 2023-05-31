@@ -21,6 +21,10 @@ body {
     border: 1px solid palevioletred;
 }
 
-.activated {
+.sketchBlack {
     background-color: #000;
+}
+
+.sketchPink {
+    background-color: pink;
 }

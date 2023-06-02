@@ -1,6 +1,6 @@
 let gridNumber = 99;
 let trigger = false;
-let colour = 'hotpink';
+let colour = 'rainbow';
 
 const grid = document.querySelector('.grid');
 const sketchColour = document.querySelector('.activated');
@@ -32,9 +32,27 @@ mouseTarget.forEach(target => target.addEventListener('mouseup', (e) => {
 // For each square in grid, set background color on mouseover if drawing enabled
 mouseTarget.forEach(target => target.addEventListener('mouseover', (e) => {
     if (trigger) {
-        target.style.backgroundColor = `${colour}`;
+        if (colour === 'rainbow') {
+            target.style.backgroundColor = getRainbow();
+        }
+        else {
+            target.style.backgroundColor = `${colour}`;
+        }
     };
 }));
+
+// Make rainbow sketch colour
+function getRainbow() {
+    let rainbowRed = Math.floor(Math.random() * 255);
+    let rainbowGreen = Math.floor(Math.random() * 255);
+    let rainbowBlue = Math.floor(Math.random() * 255);
+    
+    let rainbow = `rgb(${rainbowRed}, ${rainbowGreen}, ${rainbowBlue})`;
+
+    return rainbow;
+}
+
+
 
 
 

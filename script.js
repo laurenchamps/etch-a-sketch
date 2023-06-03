@@ -3,6 +3,9 @@ let trigger = false;
 let colour = 'rainbow';
 
 const grid = document.querySelector('.grid');
+const rainbowBtn = document.getElementById('rainbow');
+const eraserBtn = document.getElementById('eraser');
+const clearBtn = document.getElementById('clear');
 
 // Create grid
 for (let i = 0; i < (gridNumber * gridNumber); i++) {
@@ -50,6 +53,19 @@ function getRainbow() {
 
     return rainbow;
 }
+
+// Clear grid
+
+function clearGrid() {
+    grid.innerHTML = '';
+}
+
+// Event listeners
+// rainbowBtn.addEventListener('click', setColour);
+// eraserBtn.addEventListener('click', setColour);
+clearBtn.addEventListener('click', clearGrid);
+
+
 
 
 

@@ -3,7 +3,6 @@ let trigger = false;
 let colour = 'rainbow';
 
 const grid = document.querySelector('.grid');
-const sketchColour = document.querySelector('.activated');
 
 // Create grid
 for (let i = 0; i < (gridNumber * gridNumber); i++) {
@@ -20,17 +19,17 @@ grid.style.gridTemplateRows = `repeat(${gridNumber}, 1fr)`;
 const mouseTarget = document.querySelectorAll('.grid-square');
 
 // For each square, enable drawing on mousedown
-mouseTarget.forEach(target => target.addEventListener('mousedown', (e) => {
+mouseTarget.forEach(target => target.addEventListener('mousedown', () => {
     trigger = true;
 }));
 
 // For each square, disable drawing on mousedown
-mouseTarget.forEach(target => target.addEventListener('mouseup', (e) => {
+mouseTarget.forEach(target => target.addEventListener('mouseup', () => {
     trigger = false;
 }));
 
 // For each square in grid, set background color on mouseover if drawing enabled
-mouseTarget.forEach(target => target.addEventListener('mouseover', (e) => {
+mouseTarget.forEach(target => target.addEventListener('mouseover', () => {
     if (trigger) {
         if (colour === 'rainbow') {
             target.style.backgroundColor = getRainbow();
@@ -56,10 +55,4 @@ function getRainbow() {
 
 
 
-
-
-//Get grid size
-// const size = document.querySelector('#size').value;
-
-// console.log(size);
 

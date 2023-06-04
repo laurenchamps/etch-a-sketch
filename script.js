@@ -1,4 +1,3 @@
-
 const grid = document.querySelector('.grid');
 const rainbowBtn = document.getElementById('rainbow');
 const eraserBtn = document.getElementById('eraser');
@@ -6,6 +5,7 @@ const blackBtn = document.getElementById('black');
 const clearBtn = document.getElementById('clear');
 const sizeRange = document.getElementById('grid-size');
 const sizeLabel = document.getElementById('size-label');
+const gridElement = document.querySelectorAll('gridSquare');
 
 let size = sizeRange.value;
 let colour = 'black';
@@ -17,11 +17,29 @@ function createGrid() {
         gridSquare.className = 'grid-square';
         grid.appendChild(gridSquare);
         gridSquare.addEventListener('mouseover', draw);
+        gridSquare.addEventListener('mousedown', mouseActivity);
+        gridSquare.addEventListener('mouseup', mouseActivity);
     };
     
     // Size grid based on input
     grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;    
+}
+
+// Toggle mousedown and up to turn pencil on and off
+let mouseDown = false;
+
+function mouseActivity(e) {
+    if (e.type === 'mousedown') {
+        setMouseDown(true);
+    } else if (e.type === 'mouseup') {
+        setMouseDown(false);
+    }
+    console.log(mouseDown);
+}
+
+function setMouseDown(boolean) {
+    mouseDown = boolean;
 }
 
 // Make rainbow sketch colour
@@ -33,16 +51,18 @@ function getRainbow() {
     return `rgb(${rainbowRed}, ${rainbowGreen}, ${rainbowBlue})`;
 }
 
-// Draw function
+// Draw in grid
 function draw(e) {
-    if (rainbowBtn.classList.contains('activate')) {
-        changeColour(getRainbow());
-    } else if (eraserBtn.classList.contains('activate')) {
-        changeColour('#fff');
-    } else if (blackBtn.classList.contains('activate')) {
-        changeColour('#000');
+    if (mouseDown) {
+        if (rainbowBtn.classList.contains('activate')) {
+            changeColour(getRainbow());
+        } else if (eraserBtn.classList.contains('activate')) {
+            changeColour('#fff');
+        } else if (blackBtn.classList.contains('activate')) {
+            changeColour('#000');
+        }
+        e.target.style.backgroundColor = colour;
     }
-    e.target.style.backgroundColor = colour;
 }
 
 // Clear grid
@@ -56,21 +76,13 @@ function resetGrid() {
     createGrid();
 }
 
-// Change size
-function changeSize(newSize) {
-    size = newSize;
-}
-
 // Change colour
 function changeColour(newColour) {
     colour = newColour;
     // return colour;
 }
 
-function displaySize(size) {
-    sizeLabel.textContent = size;
-}
-
+// Set grid size
 function setSize(e) {
     changeSize(Number(e.target.value));
     displaySize(`${e.target.value} x ${e.target.value}`);
@@ -78,6 +90,17 @@ function setSize(e) {
     resetGrid();
 }
 
+// Change grid size
+function changeSize(newSize) {
+    size = newSize;
+}
+
+// Display size on screen
+function displaySize(size) {
+    sizeLabel.textContent = size;
+}
+
+// Turn pencil colours on and off
 function activateColour(e) {
     if (e.target.id === 'rainbow') {
         rainbowBtn.classList.add('activate');
@@ -104,12 +127,6 @@ eraserBtn.addEventListener('click', activateColour);
 blackBtn.addEventListener('click', activateColour);
 clearBtn.addEventListener('click', resetGrid);
 sizeRange.addEventListener('input', setSize);
-
-
-// sizeRange.addEventListener('input', setSize);
-
-
-
 
 
 

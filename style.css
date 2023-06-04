@@ -8,12 +8,28 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    background-color: rgb(253, 225, 204);
+}
+
+footer {
+    text-align: center;
+    margin: 0;
+    padding-bottom: 0.5em;
+    font-size: 0.9rem;
+    color: #7d7b7b;
 }
 
 h1 {
+    margin: 0;
+    padding-top: 0.5em;
     font-family: 'Satisfy', cursive;
     font-size: 4rem;
     text-align: center;
+    color: rgb(244, 25, 25);
 }
 
 h2 {
@@ -29,6 +45,7 @@ main {
 
 .container {
     display: flex;
+    padding-bottom: 2em;
 }
 
 .grid-container {
@@ -42,6 +59,7 @@ main {
     height: 500px;
     border: 1px solid grey;
     box-shadow: 1px 1px;
+    background-color: #e1dede;
 }
 
 .grid-size {
@@ -62,3 +80,6 @@ button {
     font-size: 1em;
 }
 
+.size-slider {
+    text-align: center;
+}

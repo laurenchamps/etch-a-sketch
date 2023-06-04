@@ -6,6 +6,8 @@ const grid = document.querySelector('.grid');
 const rainbowBtn = document.getElementById('rainbow');
 const eraserBtn = document.getElementById('eraser');
 const clearBtn = document.getElementById('clear');
+// const gridElement = document.querySelectorAll('.grid-square');
+// const sizeRange = document.get
 
 // Create grid
 function createGrid() {
@@ -21,44 +23,22 @@ function createGrid() {
     grid.style.gridTemplateRows = `repeat(${gridNumber}, 1fr)`;    
 }
 
-// Get all squares in the grid
-const mouseTarget = document.querySelectorAll('.grid-square');
-
-// // For each square, enable drawing on mousedown
-// mouseTarget.forEach(target => target.addEventListener('mousedown', () => {
-//     trigger = true;
-// }));
-
-// // For each square, disable drawing on mousedown
-// mouseTarget.forEach(target => target.addEventListener('mouseup', () => {
-//     trigger = false;
-// }));
-
-// // For each square in grid, set background color on mouseover if drawing enabled
-// mouseTarget.forEach(target => target.addEventListener('mouseover', () => {
-//     if (trigger) {
-//         if (colour === 'rainbow') {
-//             target.style.backgroundColor = getRainbow();
-//         }
-//         else {
-//             target.style.backgroundColor = `${colour}`;
-//         }
-//     };
-// }));
-
 // Make rainbow sketch colour
 function getRainbow() {
     let rainbowRed = Math.floor(Math.random() * 255);
     let rainbowGreen = Math.floor(Math.random() * 255);
     let rainbowBlue = Math.floor(Math.random() * 255);
     
-    let rainbow = `rgb(${rainbowRed}, ${rainbowGreen}, ${rainbowBlue})`;
-
-    changeColour(rainbow);
+    return `rgb(${rainbowRed}, ${rainbowGreen}, ${rainbowBlue})`;
 }
 
 // Draw function
 function draw(e) {
+    if (rainbowBtn.classList.contains('activate')) {
+        changeColour(getRainbow());
+    } else if (eraserBtn.classList.contains('activate')) {
+        changeColour('#fff');
+    }
     e.target.style.backgroundColor = colour;
 }
 
@@ -73,6 +53,11 @@ function resetGrid() {
     createGrid();
 }
 
+// Change size
+function changeSize(newSize) {
+    size = newSize;
+}
+
 // Change colour
 function changeColour(newColour) {
     colour = newColour;
@@ -81,13 +66,34 @@ function changeColour(newColour) {
 
 // Set different colour from default
 function setColour(e) {
-    let newColour;
-    const gridElement = document.querySelectorAll('.grid-square');
-    
+    if (rainbowBtn.classList.contains('activate')) {
+        changeColour(getRainbow());
+    } else if (eraserBtn.classList.contains('activate')) {
+        gridElement.forEach(element => element.addEventListener('mouseover', getEraser));
+    }
+}
+
+// Set eraser 
+function getEraser(e) {
+    changeColour('#fff');
+}
+
+// function setSize(e) {
+//     console.log(e.target.value)
+//     changeSize(e.target.value);
+// }
+
+function activateColour(e) {
     if (e.target.id === 'rainbow') {
-        gridElement.forEach(element => element.addEventListener('mouseover', getRainbow));
+        rainbowBtn.classList.add('activate');
     } else if (e.target.id === 'eraser') {
-        changeColour('#fff');
+        eraserBtn.classList.add('activate');
+    }
+
+    if (e.target.id === 'rainbow') {
+        eraserBtn.classList.remove('activate');
+    } else if (e.target.id === 'eraser') {
+        rainbowBtn.classList.remove('activate');
     }
 }
 
@@ -95,9 +101,12 @@ createGrid();
 
 // Event listeners
 
-rainbowBtn.addEventListener('click', setColour);
-eraserBtn.addEventListener('click', setColour);
+rainbowBtn.addEventListener('click', activateColour);
+eraserBtn.addEventListener('click', activateColour);
 clearBtn.addEventListener('click', resetGrid);
+
+
+// sizeRange.addEventListener('input', setSize);
 
 
 

@@ -1,4 +1,4 @@
-let gridNumber = 99;
+let size = 64;
 let trigger = false;
 let colour = 'black';
 
@@ -7,11 +7,11 @@ const rainbowBtn = document.getElementById('rainbow');
 const eraserBtn = document.getElementById('eraser');
 const clearBtn = document.getElementById('clear');
 // const gridElement = document.querySelectorAll('.grid-square');
-// const sizeRange = document.get
+const sizeRange = document.getElementById('grid-size');
 
 // Create grid
 function createGrid() {
-    for (let i = 0; i < (gridNumber * gridNumber); i++) {
+    for (let i = 0; i < (size * size); i++) {
         const gridSquare = document.createElement('div');
         gridSquare.className = 'grid-square';
         grid.appendChild(gridSquare);
@@ -19,8 +19,8 @@ function createGrid() {
     };
     
     // Size grid based on input
-    grid.style.gridTemplateColumns = `repeat(${gridNumber}, 1fr)`;
-    grid.style.gridTemplateRows = `repeat(${gridNumber}, 1fr)`;    
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;    
 }
 
 // Make rainbow sketch colour
@@ -78,10 +78,11 @@ function getEraser(e) {
     changeColour('#fff');
 }
 
-// function setSize(e) {
-//     console.log(e.target.value)
-//     changeSize(e.target.value);
-// }
+function setSize(e) {
+    changeSize(Number(e.target.value));
+    clearGrid();
+    resetGrid();
+}
 
 function activateColour(e) {
     if (e.target.id === 'rainbow') {
@@ -104,6 +105,7 @@ createGrid();
 rainbowBtn.addEventListener('click', activateColour);
 eraserBtn.addEventListener('click', activateColour);
 clearBtn.addEventListener('click', resetGrid);
+sizeRange.addEventListener('input', setSize);
 
 
 // sizeRange.addEventListener('input', setSize);

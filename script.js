@@ -1,14 +1,14 @@
-let size = 64;
-let trigger = false;
-let colour = 'black';
 
 const grid = document.querySelector('.grid');
 const rainbowBtn = document.getElementById('rainbow');
 const eraserBtn = document.getElementById('eraser');
+const blackBtn = document.getElementById('black');
 const clearBtn = document.getElementById('clear');
-// const gridElement = document.querySelectorAll('.grid-square');
 const sizeRange = document.getElementById('grid-size');
 const sizeLabel = document.getElementById('size-label');
+
+let size = sizeRange.value;
+let colour = 'black';
 
 // Create grid
 function createGrid() {
@@ -39,6 +39,8 @@ function draw(e) {
         changeColour(getRainbow());
     } else if (eraserBtn.classList.contains('activate')) {
         changeColour('#fff');
+    } else if (blackBtn.classList.contains('activate')) {
+        changeColour('#000');
     }
     e.target.style.backgroundColor = colour;
 }
@@ -65,20 +67,6 @@ function changeColour(newColour) {
     // return colour;
 }
 
-// Set different colour from default
-function setColour(e) {
-    if (rainbowBtn.classList.contains('activate')) {
-        changeColour(getRainbow());
-    } else if (eraserBtn.classList.contains('activate')) {
-        gridElement.forEach(element => element.addEventListener('mouseover', getEraser));
-    }
-}
-
-// Set eraser 
-function getEraser(e) {
-    changeColour('#fff');
-}
-
 function displaySize(size) {
     sizeLabel.textContent = size;
 }
@@ -93,14 +81,16 @@ function setSize(e) {
 function activateColour(e) {
     if (e.target.id === 'rainbow') {
         rainbowBtn.classList.add('activate');
+        eraserBtn.classList.remove('activate');
+        blackBtn.classList.remove('activate');
     } else if (e.target.id === 'eraser') {
         eraserBtn.classList.add('activate');
-    }
-
-    if (e.target.id === 'rainbow') {
-        eraserBtn.classList.remove('activate');
-    } else if (e.target.id === 'eraser') {
         rainbowBtn.classList.remove('activate');
+        blackBtn.classList.remove('activate');
+    } else if (e.target.id === 'black') {
+        blackBtn.classList.add('activate');
+        rainbowBtn.classList.remove('activate');
+        eraserBtn.classList.remove('activate');
     }
 }
 
@@ -111,6 +101,7 @@ displaySize('16 x 16');
 
 rainbowBtn.addEventListener('click', activateColour);
 eraserBtn.addEventListener('click', activateColour);
+blackBtn.addEventListener('click', activateColour);
 clearBtn.addEventListener('click', resetGrid);
 sizeRange.addEventListener('input', setSize);
 

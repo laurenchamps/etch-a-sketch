@@ -8,6 +8,7 @@ const eraserBtn = document.getElementById('eraser');
 const clearBtn = document.getElementById('clear');
 // const gridElement = document.querySelectorAll('.grid-square');
 const sizeRange = document.getElementById('grid-size');
+const sizeLabel = document.getElementById('size-label');
 
 // Create grid
 function createGrid() {
@@ -78,8 +79,13 @@ function getEraser(e) {
     changeColour('#fff');
 }
 
+function displaySize(size) {
+    sizeLabel.textContent = size;
+}
+
 function setSize(e) {
     changeSize(Number(e.target.value));
+    displaySize(`${e.target.value} x ${e.target.value}`);
     clearGrid();
     resetGrid();
 }
@@ -99,6 +105,7 @@ function activateColour(e) {
 }
 
 createGrid();
+displaySize('16 x 16');
 
 // Event listeners
 

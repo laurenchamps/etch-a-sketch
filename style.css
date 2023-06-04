@@ -5,11 +5,33 @@
 }
 
 body {
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
 }
 
+h1 {
+    font-family: 'Satisfy', cursive;
+    font-size: 4rem;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 2em;
+}
+
+main {
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 .container {
+    display: flex;
+}
+
+.grid-container {
     display: grid;
     place-content: center;
 }
@@ -18,13 +40,25 @@ body {
     display: grid;
     width: 500px;
     height: 500px;
-    border: 1px solid palevioletred;
+    border: 1px solid grey;
+    box-shadow: 1px 1px;
 }
 
-.sketchBlack {
-    background-color: #000;
+.grid-size {
+    text-align: center;
 }
 
-.sketchPink {
-    background-color: rgb(255, 192, 203);
+.canvas {
+    margin-right: 2em;
 }
+
+.inputs {
+    margin-left: 2em;
+}
+
+button {
+    font-family: inherit;
+    padding: 1em 3em;
+    font-size: 1em;
+}
+

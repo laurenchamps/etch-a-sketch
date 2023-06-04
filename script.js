@@ -8,16 +8,18 @@ const eraserBtn = document.getElementById('eraser');
 const clearBtn = document.getElementById('clear');
 
 // Create grid
-for (let i = 0; i < (gridNumber * gridNumber); i++) {
-    const gridSquare = document.createElement('div');
-    gridSquare.className = 'grid-square';
-    grid.appendChild(gridSquare);
-    gridSquare.addEventListener('mouseover', draw);
-};
-
-// Size grid based on input
-grid.style.gridTemplateColumns = `repeat(${gridNumber}, 1fr)`;
-grid.style.gridTemplateRows = `repeat(${gridNumber}, 1fr)`;
+function createGrid() {
+    for (let i = 0; i < (gridNumber * gridNumber); i++) {
+        const gridSquare = document.createElement('div');
+        gridSquare.className = 'grid-square';
+        grid.appendChild(gridSquare);
+        gridSquare.addEventListener('mouseover', draw);
+    };
+    
+    // Size grid based on input
+    grid.style.gridTemplateColumns = `repeat(${gridNumber}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${gridNumber}, 1fr)`;    
+}
 
 // Get all squares in the grid
 const mouseTarget = document.querySelectorAll('.grid-square');
@@ -65,6 +67,12 @@ function clearGrid() {
     grid.innerHTML = '';
 }
 
+// Reset grid
+function resetGrid() {
+    clearGrid();
+    createGrid();
+}
+
 // Change colour
 function changeColour(newColour) {
     colour = newColour;
@@ -83,12 +91,13 @@ function setColour(e) {
     }
 }
 
+createGrid();
 
 // Event listeners
 
 rainbowBtn.addEventListener('click', setColour);
 eraserBtn.addEventListener('click', setColour);
-clearBtn.addEventListener('click', clearGrid);
+clearBtn.addEventListener('click', resetGrid);
 
 
 

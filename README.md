@@ -1,6 +1,6 @@
 # etch-a-sketch
 Etch-a-sketch project for [The Odin Project](https://www.theodinproject.com/lessons/foundations-etch-a-sketch) (built for desktop).
 
-:point-right: [Live preview](https://beamish-lamington-ac1ca0.netlify.app/)
+:point_right: [Live preview](https://beamish-lamington-ac1ca0.netlify.app/)
 
 
